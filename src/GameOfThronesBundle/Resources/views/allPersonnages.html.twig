@@ -1,0 +1,14 @@
+
+
+    {% for perso in personnages %}
+        <h1>{{ perso.nom }}</h1>
+        <ul>
+            <li>{{ perso.prenom }}</li>
+            <li>{{ perso.sexe }}</li>
+            <li>{{ perso.bio }}</li>
+            <li>
+                {{ perso.royaume.nom }}
+            </li>
+        </ul>
+
+    {% endfor %}

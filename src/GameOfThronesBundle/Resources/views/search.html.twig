@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <form action="{{ path('search') }}" method="post" name="perso">
+                <label for="royaume">Selectionnez un royaume</label>
+                <select id="royaume" name="royaume">
+                    <option value="royaume_1">royaume_1</option>
+                    <option value="royaume_2">royaume_2</option>
+                    <option value="royaume_3">royaume_3</option>
+                    <option value="royaume_4">royaume_4</option>
+                </select>
+                <input type="submit">
+            </form>
+        </div>
+        <div class="col-md-6 col-xs-12" id="content">
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+        $(document).ready( function () {
+            $('form[name="perso"]').submit(function (event) {
+                event.preventDefault();
+
+                var data = new FormData(this);
+                $.ajax({
+                    method:'post',
+                    url: '{{ path('search') }}',
+                    processData: false,
+                    contentType: false,
+                    data: data,
+
+                    success: function (response) {
+                        $('#content').html(response).hide().fadeIn(500, function (){
+                            $(this).find('h1').css('color', 'red');
+                        });
+                    },
+
+                    error:function() {
+                        alert('ça crashhhhhh!');
+
+                    }
+                });
+            });
+
+        });
+
+
+
+    </script>
+
+{% endblock %}

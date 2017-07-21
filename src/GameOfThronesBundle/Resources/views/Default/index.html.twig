@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <h1 class="text-center">Hello Everybody</h1>
+
+    <div id="content">
+
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+        $(document).ready( function () {
+            $('#showPerso').click( function (event) {
+                event.preventDefault();
+
+            var data = "coucou ça roule";
+
+                $.ajax({
+                    method:'post',
+                    url: '{{ path('persos') }}',
+                    data: data,
+                    
+                    success: function (response) {
+                        $('#content').html(response)
+                    },
+
+                    error:function() {
+                        alert('ça crashhhhhh!');
+
+                    }
+                });
+            });
+        });
+
+    </script>
+
+{% endblock %}
+
+
